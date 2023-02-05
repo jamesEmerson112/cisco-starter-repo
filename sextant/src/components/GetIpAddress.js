@@ -8,16 +8,13 @@ const URL = "https://api.ipify.org?format=json";
 const URL6 = "https://api64.ipify.org?format=json";
 
 function GetIpAddress(props) {
-
   const isIpv4 = props.isIpv4;
-  console.log('is4 ', isIpv4)
+
   const [ipv4, setIpv4] = useState('');
   const [ipv6, setIpv6] = useState('');
 
   useEffect(() => {
     const LINK = isIpv4 ? URL : URL6;
-    // if (isIpv4) console.log('ipv4')
-    // else console.log('ipv6');
     axios.get(LINK)
       .then((response) => {
         if(isIpv4) setIpv4(response.data.ip);
