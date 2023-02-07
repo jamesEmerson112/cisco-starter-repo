@@ -16,7 +16,3 @@ wsServer.on('request', function (request) {
         connection.sendUTF(new Date().getTime())
     }, 100);
 });
-
-wsServer.on('connect', function(request) {
-    console.log('connecting');
-})

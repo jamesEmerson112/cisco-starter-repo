@@ -16,15 +16,10 @@ const DisplayLatency = () => {
   const [time, setTime] = useState(0);
 
   useEffect(() => {
-    console.log('DisplayLatency');
-
-    socket.on('request', () => {
-      console.log('Connected to server-request');
+    socket.on('request', (message) => {
+      console.log(message);
     });
 
-    socket.on('connect', () => {
-      console.log('Connected to server')
-    })
 
     socket.on('message', (message) => {
       setTime(message);
