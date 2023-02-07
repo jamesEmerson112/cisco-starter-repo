@@ -12,17 +12,18 @@ import io from 'socket.io-client';
 const socket = io("ws://localhost:55455", {
   transports: ["websocket"]
 });
+// const socket = io("ws://localhost:55455");
 const DisplayLatency = () => {
   const [time, setTime] = useState(0);
+  const [message, setMessage] = useState('');
 
   useEffect(() => {
-    socket.on('request', (message) => {
-      console.log(message);
+    socket.on('connect', () => {
+      setMessage('server connected')
     });
 
-
-    socket.on('message', (message) => {
-      setTime(message);
+    socket.on('message', (timestamp) => {
+      setTime(timestamp);
     });
 
     return () => {
@@ -33,6 +34,7 @@ const DisplayLatency = () => {
   return (
     <div>
       <p>Time from server: {time}</p>
+      <p>Message: {message}</p>
     </div>
   );
 };
