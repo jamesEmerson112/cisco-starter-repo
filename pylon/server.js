@@ -5,6 +5,9 @@ const server = http.createServer();
 server.listen(55455);
 const wsServer = new webSocketServer({ httpServer: server });
 
+console.log('Running the server. Awaiting the connection...')
+
+
 wsServer.on('request', function (request) {
     console.log('establishing a new connection with client');
     var connection = request.accept(null, request.origin);

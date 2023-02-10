@@ -1,7 +1,6 @@
 import './App.css';
 import Banner from './components/Banner.js';
 import Dashboard from './components/dashboard/Dashboard.js';
-import React, { useState, useEffect } from 'react';
 
 const exhibits = [
   'Metric 1',
