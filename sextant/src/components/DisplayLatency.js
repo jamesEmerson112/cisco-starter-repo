@@ -1,45 +1,29 @@
-// import axios for HTTP request
-// import axios from 'axios';
-
-// import WebSocket from 'ws';
-
-// Create a new React Component, which displays packet latency from Pylon. Your component should open a websocket to
-// ws://localhost:55455, the endpoint advertised by Pylon. Use this library to work with Websockets.
 import React, { useState, useEffect } from 'react';
-import io from 'socket.io-client';
+import useWebSocket from 'react-use-websocket';
 
-// const socket = io.connect('ws://localhost:55455');
-const socket = io("ws://localhost:55455", {
-  transports: ["websocket"]
-});
 const DisplayLatency = () => {
-  const [time, setTime] = useState(0);
+  const [serverTime, setServerTime] = useState(0);
+  const { lastMessage } = useWebSocket('ws://localhost:55455', {
+    onMessage: (event) => {
+      setServerTime(event.data);
+    },
+  });
+  const [latency, setLatency] = useState(0);
 
-  useEffect(() => {
-    socket.on('request', (message) => {
-      console.log(message);
-    });
+  // Every time your component receives a new message, it should determine the associated packet latency by subtracting the packet timestamp from the current time.
 
+  // Once you’ve figured out the latency, you should display this metric to the user in a new container component, just like you did with IP addresses in the last step.
 
-    socket.on('message', (message) => {
-      setTime(message);
-    });
-
-    return () => {
-      socket.disconnect();
-    };
-  }, []);
+  useEffect(()=>{
+    const currentTime = new Date().getTime();
+    setLatency(currentTime - serverTime);
+  }, [serverTime])
 
   return (
     <div>
-      <p>Time from server: {time}</p>
+      <h2>Latency: {latency}</h2>
     </div>
   );
 };
 
 export default DisplayLatency;
-
-
-
-
-
