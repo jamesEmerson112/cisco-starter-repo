@@ -5,6 +5,7 @@ import 'chartjs-adapter-luxon';
 import StreamingPlugin from 'chartjs-plugin-streaming';
 
 Chart.register(StreamingPlugin);
+
 const DisplayLatency = () => {
   const [serverTime, setServerTime] = useState(0);
   const { lastMessage } = useWebSocket('ws://localhost:55455', {
@@ -20,9 +21,6 @@ const DisplayLatency = () => {
   }, [serverTime])
 
 // ==================================
-
-
-
   return (
     <div>
       <h2>Latency: {latency}</h2>
