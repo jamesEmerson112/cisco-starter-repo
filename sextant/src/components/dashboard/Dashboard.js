@@ -7,10 +7,10 @@ function Dashboard(props) {
 
   // const exhibits = props.exhibits;
   return (
-    <div id="dashboard" className="bg-slate-400">
+    <div id="dashboard" >
       <GetIpAddress isIpv4={isIpv4}/>
       <GetIpAddress isIpv4={!isIpv4}/>
-      <DisplayLatency />
+      <DisplayLatency className='h-fit'/>
     </div>
   )
 }
