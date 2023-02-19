@@ -1,14 +1,6 @@
 import GetIpAddress from './../GetIpAddress.js';
 import DisplayLatency from './../DisplayLatency.js';
-import React, { useState, useEffect, useMemo } from 'react';
-import useWebSocket from 'react-use-websocket';
-import { Line, Chart } from 'react-chartjs-2';
-import 'chartjs-adapter-luxon';
-import StreamingPlugin from 'chartjs-plugin-streaming';
-
-Chart.register(StreamingPlugin);
-
-
+import React, { useState } from 'react';
 
 function Dashboard(props) {
   const [isIpv4, setIsIpv4] = useState(true);

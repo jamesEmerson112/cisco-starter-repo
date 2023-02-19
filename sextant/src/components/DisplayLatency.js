@@ -8,19 +8,6 @@ Chart.register(StreamingPlugin);
 
 let data = [{x: Date.now(), y: 0}];
 
-
-const LineChart = ({data}) => {
-  const [latency, setLatency] = useState(data);
-
-  useEffect(() => {
-    setLatency(data);
-  }, [data]);
-
-  return <>
-
-  </>
-}
-
 const DisplayLatency = () => {
   const [serverTime, setServerTime] = useState(0);
   const { lastMessage } = useWebSocket('ws://localhost:55455', {
