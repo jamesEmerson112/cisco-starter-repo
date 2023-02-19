@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
 import GetIpAddress from './../GetIpAddress.js';
 import DisplayLatency from './../DisplayLatency.js';
+import React, { useState } from 'react';
 
 function Dashboard(props) {
   const [isIpv4, setIsIpv4] = useState(true);
