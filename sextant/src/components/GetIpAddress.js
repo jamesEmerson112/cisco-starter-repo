@@ -24,7 +24,7 @@ function GetIpAddress(props) {
   }, [])
 
   return (
-    <div id="IpAddress" className="bg-slate-50 hover:bg-slate-200">
+    <div id="IpAddress" className="bg-slate-50 hover:bg-slate-200 py-1">
       <h1>{isIpv4 ? 'ipv4: ' + ipv4 : 'ipv6: ' + ipv6}</h1>
     </div>
   )

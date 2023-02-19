@@ -12,6 +12,7 @@ let data = [{x: Date.now(), y: 0}];
 const DisplayLatency = () => {
   const [serverTime, setServerTime] = useState(0);
   const [delayCounter, setDelayCounter] = useState(0);      // delay the data push process to not overwhelm the visualization
+  const [flowOfInput, setFlowOfInput] = useState(10);
   const { lastMessage } = useWebSocket('ws://localhost:55455', {
     onMessage: (event) => {
       setServerTime(event.data);
@@ -22,7 +23,7 @@ const DisplayLatency = () => {
 
   // Update the latency
   useEffect(()=>{
-    if (delayCounter % 10 === 0) {
+    if (delayCounter % flowOfInput === 0) {
       const currentTime = new Date().getTime();
       const latencyResult = serverTime !== 0 ? currentTime - serverTime : 0;
       if (latency.length > 500) {
@@ -34,7 +35,7 @@ const DisplayLatency = () => {
 
   // dynamic Line Chart
   const lineChart =
-  <Line className="bg-slate-100"
+  <Line className='h-screen'
   data={{
     datasets: [{
       label: 'Latency overtime',
@@ -56,7 +57,7 @@ const DisplayLatency = () => {
       x: {
         type: 'realtime',
         realtime: {
-          duration: 20000,
+          duration: 25000,
           delay: 2000,
         },
         title: {
@@ -77,7 +78,18 @@ const DisplayLatency = () => {
 />
 
 
-  return <div>
+  return <div id='Latency-report' className="bg-slate-100 h-screen">
+    <div id='buttons' >
+      <button className='mr-10 button-tailwind'
+      onClick={() => setFlowOfInput(20)}
+      >Loose</button>
+      <button className='mr-10 button-tailwind'
+      onClick={() => setFlowOfInput(10)}
+      >Default</button>
+      <button className='mr-10 button-tailwind'
+      onClick={() => setFlowOfInput(1)}
+      >Dense</button>
+    </div>
     {lineChart}
   </div>
 
